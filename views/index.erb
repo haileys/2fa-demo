@@ -1,0 +1,45 @@
+<h1>Welcome to the two-factor auth demo app</h1>
+
+<% if @user %>
+  <p>
+    Logged in as <b><%= @user.name %></b>.
+  </p>
+  <p>
+    You may <a href="/logout">logout</a> or go to the <a href="/secret">secret area</a>
+  </p>
+  <form method="post" action="/invalidate">
+    <input type="submit" value="My phone is lost/stolen. Invalidate my current 2FA details." />
+  </form>
+<% else %>
+  <p>Not logged in.</p>
+  
+  <h3>Login</h3>
+  <form method="post" action="/login">
+    <% if @login_errors %>
+      <ul class="errors">
+        <% @login_errors.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    Username: <input name="name"> <br />
+    Password: <input name="password" type="password"> <br />
+    Verification code: <input name="code" />
+    <input type="submit" value="Login" />
+  </form>
+  
+  <h3>Register</h3>
+  <form method="post" action="/register">
+    <% if @register_errors %>
+      <ul class="errors">
+        <% @register_errors.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    Username: <input name="name"> <br />
+    Password: <input name="password" type="password"> <br />
+    Password (confirm): <input name="password_confirmation" type="password"> <br />
+    <input type="submit" value="Register" />
+  </form>
+<% end %>
