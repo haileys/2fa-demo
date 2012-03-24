@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
   
   def generate_new_secret!
-    self.secret = rand((32**15)...(32**16-1)).to_s(32).upcase
+    self.secret = ROTP::Base32.random_base32
     @totp = nil
     save!
   end
