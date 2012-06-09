@@ -7,3 +7,5 @@ gem "mysql2"
 gem "bcrypt-ruby"
 # time-based one time password stuff:
 gem "rotp"
+# deploy on thin
+gem "thin"
